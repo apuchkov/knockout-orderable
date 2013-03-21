@@ -13,10 +13,12 @@
         //make sure we sort only once and not for every binding set on table header
         if (viewModel[collection].orderField() == field) {
             viewModel[collection].sort(function (left, right) {
+                var left_val  = (typeof  left[field] === 'function') ?  left[field]() :  left[field];
+                    right_val = (typeof right[field] === 'function') ? right[field]() : right[field];
                 if (viewModel[collection].orderDirection() == "desc") {
-                    return ko.bindingHandlers.orderable.compare(right[field](), left[field]());
+                    return ko.bindingHandlers.orderable.compare(right_val, left_val);
                 } else {
-                    return ko.bindingHandlers.orderable.compare(left[field](), right[field]());
+                    return ko.bindingHandlers.orderable.compare(left_val, right_val);
                 }
             });
         }
