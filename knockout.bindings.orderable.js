@@ -1,5 +1,8 @@
 ﻿ko.bindingHandlers.orderable = {
     compare: function (left, right) {
+        if (typeof left === 'string' || typeof right === 'string') {
+            return left.localeCompare(right);
+        }
         if (left > right)
             return 1;
 
