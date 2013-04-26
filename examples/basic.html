@@ -26,7 +26,7 @@
 		<thead>
 			<th><a href="#" data-bind="orderable: {collection: 'people', field: 'firstName'}">First Name</a></th>
 			<th><a href="#" data-bind="orderable: {collection: 'people', field: 'lastName'}">Last Name</a></th>
-			<th><a href="#" data-bind="orderable: {collection: 'people', field: 'age'}">Age</a></th>
+			<th><a href="#" data-bind="orderable: {collection: 'people', field: 'age', defaultField: true, defaultDirection: 'desc'}">Age</a></th>
 		</thead>
 		<tbody data-bind="foreach: people">
 			<tr>

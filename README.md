@@ -27,6 +27,10 @@ To make table header sortable set binding like this:
 
 	<th><a href="#" data-bind="orderable: {collection: 'people', field: 'firstName'}">First Name</a></th>
 
+Default field to sort can also be provided:
+
+	<th><a href="#" data-bind="orderable: {collection: 'people', field: 'age', defaultField: true, defaultDirection: 'desc'}">Age</a></th>
+
 See full example in examples folder.
 
 ##Dependencies

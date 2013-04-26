@@ -37,6 +37,14 @@
             viewModel[collection].orderDirection = ko.observable("asc");
         }
 
+        var defaultField = valueAccessor().defaultField;
+        var defaultDirection = valueAccessor().defaultDirection || "asc";
+        if (defaultField) {
+            viewModel[collection].orderField(field);            
+            viewModel[collection].orderDirection(defaultDirection);
+            ko.bindingHandlers.orderable.sort(viewModel, collection, field);
+        }
+
         //set order observables on table header click
         $(element).click(function (e) {
             e.preventDefault();
