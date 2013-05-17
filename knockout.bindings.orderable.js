@@ -1,4 +1,20 @@
 ﻿ko.bindingHandlers.orderable = {
+    getProperty: function(o, s) {
+        // copied from http://stackoverflow.com/questions/6491463/accessing-nested-javascript-objects-with-string-key
+        s = s.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
+        s = s.replace(/^\./, '');           // strip a leading dot
+        var a = s.split('.');
+        while (a.length) {
+            var n = a.shift();
+            if (n in o) {
+                o = o[n];
+            } else {
+                return;
+            }
+        }
+        return o;
+    },
+
     compare: function (left, right) {
         if (typeof left === 'string' || typeof right === 'string') {
             return left.localeCompare(right);
@@ -13,8 +29,10 @@
         //make sure we sort only once and not for every binding set on table header
         if (viewModel[collection].orderField() == field) {
             viewModel[collection].sort(function (left, right) {
-                var left_val  = (typeof  left[field] === 'function') ?  left[field]() :  left[field];
-                    right_val = (typeof right[field] === 'function') ? right[field]() : right[field];
+                var left_field = ko.bindingHandlers.orderable.getProperty(left, field);
+                var right_field = ko.bindingHandlers.orderable.getProperty(right, field);
+                var left_val  = (typeof  left_field === 'function') ?  left_field() :  left_field;
+                    right_val = (typeof right_field === 'function') ? right_field() : right_field;
                 if (viewModel[collection].orderDirection() == "desc") {
                     return ko.bindingHandlers.orderable.compare(right_val, left_val);
                 } else {
