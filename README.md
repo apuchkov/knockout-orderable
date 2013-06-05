@@ -31,7 +31,11 @@ Default field to sort can also be provided:
 
 	<th><a href="#" data-bind="orderable: {collection: 'people', field: 'age', defaultField: true, defaultDirection: 'desc'}">Age</a></th>
 
-See full example in examples folder.
+It's also possible to sort by nested attibutes by separating the attribute names with a dot (should work with array indices too):
+
+	<th><a href="#" data-bind="orderable: {collection: 'people', field: 'pet.name'}">Pet name</a></th>
+
+See full examples in examples folder.
 
 ##Dependencies
  - [jQuery](http://jquery.com/)
