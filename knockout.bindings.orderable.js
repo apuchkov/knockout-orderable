@@ -17,7 +17,7 @@
 
     compare: function (left, right) {
         if (typeof left === 'string' || typeof right === 'string') {
-            return left.localeCompare(right);
+            return left ? left.localeCompare(right) : 1;
         }
         if (left > right)
             return 1;
